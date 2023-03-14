@@ -2,6 +2,7 @@
     display:flex;
     align-items: center;
     padding-top: 40px;
+    padding-bottom: 51px;
 }
 
 .profile__image{
@@ -15,6 +16,7 @@
 
 .profile__info {
     display: grid;
+    align-items: center;
     grid-template-areas: "title button" "description description";
     grid-template-columns: minmax(auto,373px) auto;
 }
@@ -24,6 +26,9 @@
     height: 24px;
     width: 24px;
     grid-area: button;
+    border: 1px solid #FFFFFF;
+    padding: 0;
+    margin: 0 0 0 18px;
 }
 
 .profile__add-button {
@@ -32,9 +37,11 @@
     height: 50px;
     margin-left: auto;
     box-sizing: border-box;
+    border: 2px solid #FFFFFF;
 }
 
 .profile__title {
+    font-family: "Inter", sans-serif;
     font-size: 42px;
     line-height: 1.15;
     font-weight: 500;
@@ -48,4 +55,6 @@
     font-weight: 400;
     grid-area: description;
     margin: 0;
+    margin-top: 16px;
+    font-family: "Inter", sans-serif;
 }

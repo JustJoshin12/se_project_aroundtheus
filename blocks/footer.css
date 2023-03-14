@@ -1,0 +1,14 @@
+.footer {
+    font-family: "Inter", sans-serif;
+    color: #545454;
+    max-width: 318px;
+    margin-top: 67px;
+    margin-bottom: 60px;
+}
+
+.footer__copyright {
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 400;
+    margin: 0;
+}
