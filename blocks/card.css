@@ -9,6 +9,7 @@
   grid-template-columns: repeat(auto-fit,282px);
   gap: 20px 17px;
   justify-items: center;
+  margin: 0;
 }
 
 .card {
@@ -56,4 +57,18 @@
     margin: 0;
     margin-top: 36px;
   }
+}
+
+@media screen and (max-width:425px){
+  .card__list {
+    justify-content: center;
+    margin: 0;
+    margin-top: 36px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+    .card__list {
+      justify-content: center;
+    }
 }
