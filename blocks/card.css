@@ -3,7 +3,7 @@
   padding: 15px 0 36px;
 }
 
-.card__list {
+.cards__list {
   list-style-type: none;
   padding: 0;
   display: grid;
@@ -55,7 +55,7 @@
 
 
 @media screen and (max-width:480px){
-  .card__list {
+  .cards__list {
     justify-content: center;
     margin: 0;
   }
@@ -65,7 +65,7 @@
 
 
 @media screen and (480px <= width <= 999px) {
-  .card__list {
+  .cards__list {
     justify-content: center;
   }
 } 
