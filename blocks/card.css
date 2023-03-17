@@ -1,5 +1,6 @@
 .cards {
   font-family: "Inter",sans-serif;
+  padding: 15px 0 36px;
 }
 
 .card__list {
@@ -13,7 +14,7 @@
 }
 
 .card {
-  width: 282px;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -51,24 +52,20 @@
   border: none;
 }
 
-@media screen and (max-width:320px){
+
+
+@media screen and (max-width:480px){
   .card__list {
     justify-content: center;
     margin: 0;
-    margin-top: 36px;
   }
 }
 
-@media screen and (max-width:425px){
+
+
+
+@media screen and (480px <= width <= 999px) {
   .card__list {
     justify-content: center;
-    margin: 0;
-    margin-top: 36px;
   }
-}
-
-@media screen and (max-width: 768px) {
-    .card__list {
-      justify-content: center;
-    }
-}
+} 
