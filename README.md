@@ -4,11 +4,13 @@
 
 * Intro  
 * Figma  
-* Images  
+* Image 
   
 **Intro**
   
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
+  This project showcase Jacques Cousteau the worlds most famous French explorer.
+  He opened up more of the Earth's surface to human kind than any other explorer in history.
+  The project displays the use of responsive web design using both grid and flex to create a website for all viewers to enjoy.
   
 **Figma**  
   
@@ -16,6 +18,10 @@ This project is made so all the elements are displayed correctly on popular scre
   
 **Images**  
   
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+![Image of Lake Louise](./images/demo/lake-louise.jpg)
+![Image of Latemar](./images/demo/latemar.jpg)
+![Image of Yosemite](./images/demo/yosemite.jpg)
+
+**Website**
+
+* [Link to website]()
