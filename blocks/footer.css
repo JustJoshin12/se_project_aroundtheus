@@ -7,11 +7,21 @@
 }
 
 .footer__copyright {
-  max-width: 318px;
   font-size: 18px;
   line-height: 1.2;
   font-weight: 400;
+  margin: 0;
 }
 
+@media screen and (max-width: 480px) {
+  .footer {
+    margin-top: 48px;
+    margin-bottom: 36px;
+    margin-right: 19px;
+    padding-left: 19px;
+  }
 
-
+  .footer__copyright {
+    font-size: 14px;
+  }
+}

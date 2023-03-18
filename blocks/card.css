@@ -1,18 +1,3 @@
-.cards {
-  font-family: "Inter",sans-serif;
-  padding: 15px 0 36px;
-}
-
-.cards__list {
-  list-style-type: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit,282px);
-  gap: 20px 17px;
-  justify-items: center;
-  margin: 0;
-}
-
 .card {
   width: 100%;
   display: flex;
@@ -27,7 +12,7 @@
   font-weight: 900;
   font-size: 24px;
   line-height: 1.2;
-  font-family: "Inter",sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .card__image {
@@ -50,27 +35,10 @@
   width: 21px;
   height: 18px;
   border: none;
-  transition: opacity .4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
 }
-
 
 .card__like-button:hover {
   opacity: 0.5;
 }
 
-
-@media screen and (max-width:480px){
-  .cards__list {
-    justify-content: center;
-    margin: 0;
-  }
-}
-
-
-
-
-@media screen and (480px <= width <= 999px) {
-  .cards__list {
-    justify-content: center;
-  }
-} 
