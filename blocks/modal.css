@@ -1,0 +1,128 @@
+.modal {
+  color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  padding: 0 19px;
+}
+
+.modal_opened {
+  /* display: flex; */
+}
+
+.modal__container {
+  position: relative;
+  margin: auto;
+  background-color: #fff;
+  padding: 36px;
+  border-radius: 10px;
+  width: 430px;
+  max-width: 100%;
+}
+
+.modal__heading {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 54px;
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.modal__close {
+  padding: 0;
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: calc(100% + 5px);
+  background-image: url("../images/close\ icon.svg");
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__form_fieldset1 {
+    margin-bottom: 30px;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0;
+    padding-bottom: 13px;
+}
+
+.modal__form_fieldset2 {
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0;
+    padding-bottom: 13px;
+}
+
+.modal__input {
+  border: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.modal__button {
+  padding: 0;
+  margin-top: 48px;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+  border-radius: 2px;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  transition:  opacity 0.4s ease-in-out;
+}
+
+.modal__button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 630px) {
+   .modal__close {
+      width: 26px;
+      height: 26px;
+      bottom: calc(100% + 20px);
+      left: calc(100% - 30px);
+   }
+}
+
+
+@media screen and (max-width:480px) {
+    .modal__heading {
+        font-size: 18px; 
+        margin-bottom: 75px;
+    }
+    
+    .modal__container {
+        width: 282px;
+        max-width: 100%;
+        padding: 22px;
+    }
+
+    .modal__button {
+        font-size: 14px;
+    }
+
+}

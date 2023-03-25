@@ -3,15 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0," />
     <title>Around the Us</title>
     <link rel="stylesheet" href="./pages/index.css" />
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico" />
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
-        <img class="header__logo" src="./images/logo.svg" alt="Around the Us logo" />
+        <img
+          class="header__logo"
+          src="./images/logo.svg"
+          alt="Around the Us logo"
+        />
       </header>
       <main class="content">
         <section class="profile page__section">
@@ -22,10 +26,18 @@
           />
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
-            <button class="profile__edit-button" type="button" aria-label=""></button>
+            <button
+              class="profile__edit-button"
+              type="button"
+              aria-label=""
+            ></button>
             <p class="profile__description">Explorer</p>
           </div>
-          <button class="profile__add-button" type="button" aria-label=""></button>
+          <button
+            class="profile__add-button"
+            type="button"
+            aria-label=""
+          ></button>
         </section>
         <section class="cards page__section">
           <ul class="cards__list">
@@ -37,7 +49,11 @@
               />
               <div class="card__description">
                 <h2 class="card__title">Yosemite Valley</h2>
-                <button class="card__like-button" type="button" aria-label=""></button>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label=""
+                ></button>
               </div>
             </li>
             <li class="card">
@@ -48,7 +64,11 @@
               />
               <div class="card__description">
                 <h2 class="card__title">Lake Louise</h2>
-                <button class="card__like-button" type="button" aria-label=""></button>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label=""
+                ></button>
               </div>
             </li>
             <li class="card">
@@ -59,7 +79,11 @@
               />
               <div class="card__description">
                 <h2 class="card__title">Bald Mountains</h2>
-                <button class="card__like-button" type="button" aria-label=""></button>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label=""
+                ></button>
               </div>
             </li>
             <li class="card">
@@ -70,7 +94,11 @@
               />
               <div class="card__description">
                 <h2 class="card__title">Latemar</h2>
-                <button class="card__like-button" type="button" aria-label="" ></button>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label=""
+                ></button>
               </div>
             </li>
             <li class="card">
@@ -81,7 +109,11 @@
               />
               <div class="card__description">
                 <h2 class="card__title">Vanoise National Park</h2>
-                <button class="card__like-button" type="button" aria-label=""></button>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label=""
+                ></button>
               </div>
             </li>
             <li class="card">
@@ -92,16 +124,47 @@
               />
               <div class="card__description">
                 <h2 class="card__title">Lago di Braies</h2>
-                <button class="card__like-button" type="button" aria-label=""></button>
+                <button
+                  class="card__like-button"
+                  type="button"
+                  aria-label=""
+                ></button>
               </div>
             </li>
           </ul>
         </section>
       </main>
       <footer class="footer page__section">
-        <p class="footer__copyright ">© 2022 Around The U.S.</p>
+        <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
+
+    <div class="modal">
+      <div class="modal__container">
+        <button class="modal__close"></button>
+        <p class="modal__heading">Edit profile</p>
+        <form class="modal__form">
+          <fieldset class="modal__form_fieldset1">
+            <input
+              class="modal__input"
+              type="text"
+              name="title"
+              value="Jacques Cousteau"
+            />
+          </fieldset>
+          <fieldset class="modal__form_fieldset2">
+          <input
+            class="modal__input"
+            type="text"
+            name="description"
+            value="Explorer"
+          />
+        </fieldset>
+          <button class="modal__button">Save</button>
+        </form>
+      </div>
+    </div>
+
     <script src="./scripts/index.js"></script>
   </body>
 </html>
