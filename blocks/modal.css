@@ -56,7 +56,7 @@
   flex-direction: column;
 }
 
-.modal__form_fieldset1 {
+.modal__fieldset1 {
     margin-bottom: 30px;
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -64,7 +64,7 @@
     padding-bottom: 13px;
 }
 
-.modal__form_fieldset2 {
+.modal__fieldset2 {
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding: 0;
