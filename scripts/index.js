@@ -64,3 +64,17 @@ let initialCards = [
     link: "https://unsplash.com/photos/Pm8Qaht8kXU",
   },
 ];
+
+let editBtn = document.querySelector(".profile__edit-button");
+let closeBtn = document.querySelector(".modal__close");
+let modalPage = document.querySelector(".modal");
+
+editBtn.addEventListener("click",function revealModal () {
+   modalPage.classList.add("modal_opened");
+})
+
+closeBtn.addEventListener("click",function hideModal () {
+  modalPage.classList.remove("modal_opened");
+})
+
+
