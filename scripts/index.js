@@ -24,57 +24,114 @@ let initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
   },
   {
-    name: "Milky way",
-    link: "https://unsplash.com/photos/0zlJK2AxLBc",
+    name: "Milky Way",
+    link: "https://images.unsplash.com/photo-1671863991352-3fc2281cccbe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=532&q=80",
   },
   {
     name: "Moraine Lake",
-    link: "https://unsplash.com/photos/oMneOBYhJxY",
+    link: "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1111&q=80",
   },
   {
     name: "Emerald Lake",
-    link: "https://unsplash.com/photos/OgcJIKRnRC8",
+    link: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
   },
   {
-    name: "llandwyn island",
-    link: "https://unsplash.com/photos/r6g4GcD6lP0",
+    name: "llandwyn Island",
+    link: "https://images.unsplash.com/photo-1515612148533-6247582c12c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "Kilauea Hawaii",
-    link: "https://unsplash.com/photos/Aduh0KXCI1w",
+    link: "https://images.unsplash.com/photo-1518457607834-6e8d80c183c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
   },
   {
     name: "Tromso Norway",
-    link: "https://unsplash.com/photos/LtnPejWDSAY",
+    link: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
   },
   {
     name: "Carpathian",
-    link: "https://unsplash.com/photos/sWa8uXRV4_g",
+    link: "https://images.unsplash.com/photo-1575126473661-877a8acf15a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
   },
   {
     name: "Colonia Tovar",
-    link: "https://unsplash.com/photos/uxG3r73r4WM",
+    link: "https://images.unsplash.com/photo-1596679593779-2c965ea8f25b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=327&q=80",
   },
   {
     name: "Cuyagua Aragua",
-    link: "https://unsplash.com/photos/fP44mZBa2zQ",
+    link: "https://images.unsplash.com/photo-1581260502159-c9204828728c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
   },
   {
     name: "San Juan",
-    link: "https://unsplash.com/photos/Pm8Qaht8kXU",
+    link: "https://images.unsplash.com/photo-1625642471723-12744e6e4211?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
   },
 ];
 
-let editBtn = document.querySelector(".profile__edit-button");
-let closeBtn = document.querySelector(".modal__close");
-let modalPage = document.querySelector(".modal");
+
+    /////////////// Elements //////////////
+
+
+
+
+const editBtn = document.querySelector(".profile__edit-button");
+const closeBtn = document.querySelector(".modal__close");
+const profileEditModal = document.querySelector("#profile-edit-modal");
+const profileTitle = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
+const profileTitleInput = document.querySelector("#profile-title-input");
+const profileDescriptionInput = document.querySelector("#profile-description-input");
+const profileEditForm = profileEditModal.querySelector(".modal__form");
+const cardListEl = document.querySelector(".cards__list")
+const cardTemplate = document.querySelector("#card-template").content.firstElementChild;
+
+
+
+//////////////////// Functions ////////////////
+
+
+
+function closePopup() {
+  profileEditModal.classList.remove("modal_opened");
+}
+
+
+
+
+/////////////////////Event Handlers/////////////////
+
+function handleProfileEditSubmit(event) {
+  event.preventDefault();
+  profileTitle.textContent = profileTitleInput.value
+  profileDescription.textContent = profileDescriptionInput.value
+  closePopup();
+}
+
+
+
+/////////////////////Event Listeners///////////////
+
+
 
 editBtn.addEventListener("click",function revealModal () {
-   modalPage.classList.add("modal_opened");
+   profileTitleInput.value = profileTitle.textContent;
+   profileDescriptionInput.value = profileDescription.textContent;
+   profileEditModal.classList.add("modal_opened");
 })
 
-closeBtn.addEventListener("click",function hideModal () {
-  modalPage.classList.remove("modal_opened");
-})
+closeBtn.addEventListener("click", closePopup)
+
+profileEditForm.addEventListener('submit', handleProfileEditSubmit)
 
 
+initialCards.forEach((cardData) =>  {
+  const cardElement = cardTemplate.cloneNode(true);
+
+  const cardImageEl = cardElement.querySelector('.card__image');
+
+  const cardTitleEl = cardElement.querySelector('.card__title');
+
+  cardTitleEl.textContent = cardData.name;
+  
+
+  cardImageEl.src = cardData.link;
+ 
+  cardListEl.append(cardElement);
+});
