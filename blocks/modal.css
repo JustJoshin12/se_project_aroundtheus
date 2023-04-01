@@ -33,7 +33,6 @@
   font-size: 24px;
   font-weight: 900;
   line-height: 1.2;
-  text-align: left;
 }
 
 .modal__close {
@@ -87,6 +86,7 @@
   background-color: #000;
   color: #fff;
   transition: opacity 0.4s ease-in-out;
+  cursor: pointer;
 }
 
 .modal__button:hover {

@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -121,17 +121,34 @@ closeBtn.addEventListener("click", closePopup)
 profileEditForm.addEventListener('submit', handleProfileEditSubmit)
 
 
-initialCards.forEach((cardData) =>  {
+function createCard (data) {
   const cardElement = cardTemplate.cloneNode(true);
+  const cardImageEl = cardElement.querySelector(".card__image");
+  const cardTitleEl = cardElement.querySelector(".card__title");
+  cardImageEl.src = data.link;
+  cardImageEl.alt = `Photo of ${data.name}`;
+  cardTitleEl.textContent = data.name;
+  return cardElement;
+}
 
-  const cardImageEl = cardElement.querySelector('.card__image');
+function renderCard(data) {
+  const cardElement = createCard(data);
+  cardListEl.prepend(cardElement);
+}
 
-  const cardTitleEl = cardElement.querySelector('.card__title');
+initialCards.forEach(renderCard);
 
-  cardTitleEl.textContent = cardData.name;
+// initialCards.forEach((cardData) =>  {
+//   const cardElement = cardTemplate.cloneNode(true);
+
+//   const cardImageEl = cardElement.querySelector('.card__image');
+
+//   const cardTitleEl = cardElement.querySelector('.card__title');
+
+//   cardTitleEl.textContent = cardData.name;
   
 
-  cardImageEl.src = cardData.link;
+//   cardImageEl.src = cardData.link;
  
-  cardListEl.append(cardElement);
-});
+//   cardListEl.append(cardElement);
+// });
