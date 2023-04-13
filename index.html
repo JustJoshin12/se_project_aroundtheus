@@ -47,10 +47,10 @@
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
-
+        <!-- Edit Modal -->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
-        <button class="modal__close" type="button"></button>
+        <button class="modal__close" id="profile-modal-close" type="button"></button>
         <p class="modal__heading">Edit profile</p>
         <form class="modal__form" id="form">
           <input
@@ -70,18 +70,55 @@
             required
           />
 
-          <button type="submit" form="form" class="modal__button" value="submit">Save</button>
+          <button
+            type="submit"
+            form="form"
+            class="modal__button"
+            value="submit"
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+          <!-- Add Card Modal -->
+    <div class="modal" id="add-card-modal">
+      <div class="modal__container">
+        <button class="modal__close" id="card-modal-close" type="button"></button>
+        <p class="modal__heading">New Place</p>
+        <form class="modal__form" id="add-card-form">
+          <input
+            type="text"
+            class="modal__input"
+            id="add-card-title"
+            name="title"
+            placeholder="Title"
+            required
+          />
+          <input
+            type="text"
+            class="modal__input"
+            id="add-card-image"
+            name="image"
+            placeholder="Image URL"
+            required
+          />
+
+          <button
+            type="submit"
+            form="form"
+            class="modal__button"
+            value="submit"
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>
 
     <template id="card-template">
       <li class="card">
-        <img
-          class="card__image"
-          src=""
-          alt=""
-        />
+        <img class="card__image" src="" alt="" />
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button
