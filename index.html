@@ -52,7 +52,7 @@
       <div class="modal__container">
         <button class="modal__close" id="profile-modal-close" type="button"></button>
         <p class="modal__heading">Edit profile</p>
-        <form class="modal__form" id="form">
+        <form class="modal__form" id="profile-edit-form">
           <input
             id="profile-title-input"
             class="modal__input"
@@ -90,22 +90,22 @@
           <input
             type="text"
             class="modal__input"
-            id="add-card-title"
+            id="card-title-input"
             name="title"
             placeholder="Title"
-            required
+           
           />
           <input
             type="text"
             class="modal__input"
-            id="add-card-image"
+            id="card-image-input"
             name="image"
             placeholder="Image URL"
-            required
+            
           />
 
           <button
-            type="submit"
+            type=submit
             form="form"
             class="modal__button"
             value="submit"
