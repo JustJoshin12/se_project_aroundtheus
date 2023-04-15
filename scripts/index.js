@@ -83,13 +83,13 @@ const addCardBtn = document.querySelector(".profile__add-button");
 
  
 const cardsWrap = document.querySelector(".cards__list");
-const cardTemplate = document.querySelector("#card-template").content.firstElementChild;
+const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
 const addCardModal = document.querySelector("#add-card-modal");
 const closeCardBtn = document.querySelector("#card-modal-close");
 const addCardForm = addCardModal.querySelector("#add-card-form");
 const cardTitleInput = document.querySelector("#card-title-input");
 const cardImageInput = document.querySelector("#card-image-input");
-const cardDeleteBtn = 
+const cardImagePop = document.querySelector("#card-image-modal");
 
 /////////////////////Functions///////////////////////
 
@@ -101,16 +101,24 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
 }
 
+
+
 function createCard (data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardLikeBtn = cardElement.querySelector(".card__like-button");
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
+  const card = cardElement.querySelector(".card");
+
 
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__like-button_active");
   })
+  
+  cardDeleteBtn.addEventListener("click", () => {
+    cardElement.remove(card);
+  });
 
   cardImageEl.src = data.link;
   cardImageEl.alt = `Photo of ${data.name}`;
@@ -131,7 +139,7 @@ function handleProfileEditSubmit(event) {
   event.preventDefault();
   profileTitle.textContent = profileTitleInput.value
   profileDescription.textContent = profileDescriptionInput.value
-  closeModal(profileEditModal);
+  profileEditModal.classList.remove("modal__opened");
 }
 
 function handleCardAddSubmit(event) {
@@ -145,12 +153,17 @@ function handleCardAddSubmit(event) {
   });
 
   cardsWrap.prepend(cardElement);
-
-  closeModal(addCardModal)
+  addCardModal.classList.remove("modal__opened");
+  
 }
 
 /////////////////////Event Listeners///////////////
 
+
+cardTemplate.addEventListener("click", () => {
+  
+  cardImagePop.classList.add("modal__opened");
+})
 
 
 editBtn.addEventListener("click",function revealModal () {
@@ -165,11 +178,11 @@ addCardBtn.addEventListener("click",  () => {
 
 
 closeProfileBtn.addEventListener("click", () => {
-  closeModal(profileEditModal)
+  profileEditModal.classList.remove("modal__opened");
 });
 
 closeCardBtn.addEventListener("click", () => {
-  closeModal(addCardModal)
+  addCardModal.classList.remove("modal__opened");
 });
 
  

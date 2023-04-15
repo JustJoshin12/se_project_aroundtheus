@@ -5,6 +5,10 @@
   position: relative;
 }
 
+.card:hover {
+  cursor: grab;
+}
+
 .card__title {
   margin: 0;
   text-overflow: ellipsis;
