@@ -11,7 +11,7 @@
   padding: 0 19px;
 }
 
-.modal__opened {
+.modal_opened {
   display: flex;
 }
 
@@ -100,9 +100,16 @@
 }
 
 .modal__image {
-  width: 75vh;
-  height: 75vh;
+  max-width: 75vw;
+  max-height: 75vh;
+}
 
+.modal__image-name {
+  font-size: 12px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  color: #fff;
+  line-height: 1.2;
 }
 
 @media screen and (max-width: 630px) {
