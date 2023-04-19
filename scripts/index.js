@@ -116,20 +116,20 @@ function createCard(data) {
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardLikeBtn = cardElement.querySelector(".card__like-button");
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
-  const card = cardElement.querySelector(".card");
+  
 
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__like-button_active");
   });
 
   cardDeleteBtn.addEventListener("click", () => {
-    cardElement.remove(card);
+    cardElement.remove();
   });
 
   cardImageEl.addEventListener("click", () => {
     modalImage.src = data.link;
     modalCaption.textContent = data.name;
-    modalCaption.alt = `Photo of ${data.name}`;
+    modalImage.alt = `Photo of ${data.name}`;
     openModal(cardImagePop);
   });
 
@@ -144,7 +144,7 @@ function renderCard(data) {
   cardsWrap.prepend(cardElement);
 }
 
-initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
+initialCards.forEach(renderCard);
 
 /////////////////////Event Handlers/////////////////
 
@@ -164,6 +164,8 @@ function handleCardAddSubmit(event) {
     name,
     link,
   });
+
+  event.target.reset();
 
   cardsWrap.prepend(cardElement);
   closeModal(addCardModal);
