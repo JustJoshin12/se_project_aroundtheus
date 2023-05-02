@@ -135,6 +135,12 @@
   opacity: 0.8;
 }
 
+
+.modal__button_disabled {
+  background-color: #E5E5E5;
+}
+
+
 .modal__image {
   max-width: 75vw;
   max-height: 75vh;
