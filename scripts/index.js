@@ -97,17 +97,42 @@ const modalImage = cardImagePop.querySelector(".modal__image");
 const modalCaption = cardImagePop.querySelector(".modal__image-name");
 const modalImageCloseBtn = document.querySelector("#image-modal-close");
 
+            // modalELement //
+const modal = document.querySelectorAll('.modal');
 
 
-/////////////////////Functions///////////////////////
+const escKeyHandler =(e)=>{
+  const escKeycode = 27
+  if (e.which === escKeycode) {
+    const activeModal = document.querySelector(".modal_opened");
+     closeModal(activeModal);
+  }
+}
+
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", escKeyHandler)
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", escKeyHandler)
 }
+
+function clickCloseHandler(modal){
+  modal.addEventListener("click", (e) => {
+    if (
+      e.target.classList.contains("modal") ||
+      e.target.classList.contains("modal__close")
+    ) {
+      closeModal(modal);
+    }
+  })
+}
+
+modal.forEach(clickCloseHandler)
+
 
 function createCard(data) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -202,3 +227,7 @@ modalImageCloseBtn.addEventListener("click", () => {
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 addCardForm.addEventListener("submit", handleCardAddSubmit);
+
+
+
+
