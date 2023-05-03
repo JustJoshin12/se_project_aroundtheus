@@ -55,7 +55,7 @@
           id="profile-modal-close"
           type="button"
         ></button>
-        <p class="modal__heading">Edit profile</p>
+        <h2 class="modal__heading">Edit profile</h2>
         <form class="modal__form" id="profile-edit-form" novalidate>
           <label class="modal__label">
             <input
@@ -98,7 +98,7 @@
           id="card-modal-close"
           type="button"
         ></button>
-        <p class="modal__heading">New Place</p>
+        <h2 class="modal__heading">New Place</h2>
         <form class="modal__form" id="add-card-form">
           <label  class="modal__label">
             <input
@@ -127,7 +127,7 @@
             <span class="modal__error" id="card-image-input-error"></span>
           </label>
 
-          <button type="submit" class="modal__button modal__button_disabled" value="submit" disabled>
+          <button type="submit" class="modal__button" value="submit" >
             Create
           </button>
         </form>
@@ -165,7 +165,7 @@
       </li>
     </template>
 
+    <script src="./scripts/validation.js" defer></script>
     <script src="./scripts/index.js" defer></script>
-    <script src="./scripts/validation.js"></script>
   </body>
 </html>

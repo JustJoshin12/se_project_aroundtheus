@@ -64,3 +64,7 @@
   top: 18px;
   right: 15px;
 }
+
+.card__delete-button:hover {
+  opacity: 0.5;
+}

@@ -67,19 +67,20 @@ const initialCards = [
 
 /////////////// Elements //////////////
 
-
-        //  profile elements //
+//  profile elements //
 const editBtn = document.querySelector(".profile__edit-button");
 const closeProfileBtn = document.querySelector("#profile-modal-close");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
-const profileDescriptionInput = document.querySelector( "#profile-description-input");
+const profileDescriptionInput = document.querySelector(
+  "#profile-description-input"
+);
 const profileEditForm = profileEditModal.querySelector("#profile-edit-form");
 const addCardBtn = document.querySelector(".profile__add-button");
 
-        // card list elements // 
+// card list elements //
 const cardsWrap = document.querySelector(".cards__list");
 const cardTemplate = document
   .querySelector("#card-template")
@@ -89,50 +90,48 @@ const closeCardBtn = document.querySelector("#card-modal-close");
 const addCardForm = addCardModal.querySelector("#add-card-form");
 const cardTitleInput = document.querySelector("#card-title-input");
 const cardImageInput = document.querySelector("#card-image-input");
+const cardInputs = [...addCardModal.querySelectorAll('.modal__input')];
+const cardAddBtn = addCardModal.querySelector(".modal__button");
 const cardImagePop = document.querySelector("#card-image-modal");
 
-
-        // card image elements //
+// card image elements //
 const modalImage = cardImagePop.querySelector(".modal__image");
 const modalCaption = cardImagePop.querySelector(".modal__image-name");
 const modalImageCloseBtn = document.querySelector("#image-modal-close");
 
-            // modalELement //
-const modal = document.querySelectorAll('.modal');
+// modalELement //
+const modalArray = document.querySelectorAll(".modal");
 
-
-const escKeyHandler =(e)=>{
-  const escKeycode = 27
+const handleEscClose = (e) => {
+  const escKeycode = 27;
   if (e.which === escKeycode) {
     const activeModal = document.querySelector(".modal_opened");
-     closeModal(activeModal);
+    closeModal(activeModal);
   }
-}
-
+};
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", escKeyHandler)
+  document.removeEventListener("keydown", handleEscClose);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", escKeyHandler)
+  document.addEventListener("keydown", handleEscClose);
 }
 
-function clickCloseHandler(modal){
-  modal.addEventListener("click", (e) => {
+function addClickCloseListener(modal) {
+  modal.addEventListener("mousedown", (e) => {
     if (
       e.target.classList.contains("modal") ||
       e.target.classList.contains("modal__close")
     ) {
       closeModal(modal);
     }
-  })
+  });
 }
 
-modal.forEach(clickCloseHandler)
-
+modalArray.forEach(addClickCloseListener);
 
 function createCard(data) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -140,7 +139,6 @@ function createCard(data) {
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardLikeBtn = cardElement.querySelector(".card__like-button");
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
-  
 
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__like-button_active");
@@ -170,9 +168,6 @@ function renderCard(data) {
 
 initialCards.forEach(renderCard);
 
-
-
-
 /////////////////////Event Handlers/////////////////
 
 function handleProfileEditSubmit(event) {
@@ -182,13 +177,10 @@ function handleProfileEditSubmit(event) {
   closeModal(profileEditModal);
 }
 
-
-
 function handleCardAddSubmit(event) {
   event.preventDefault();
   const name = cardTitleInput.value;
   const link = cardImageInput.value;
-
   const cardElement = createCard({
     name,
     link,
@@ -198,7 +190,10 @@ function handleCardAddSubmit(event) {
 
   cardsWrap.prepend(cardElement);
   closeModal(addCardModal);
-};
+  toggleButtonState(cardInputs, cardAddBtn, config)
+  
+  
+}
 
 /////////////////////Event Listeners///////////////
 
@@ -227,7 +222,3 @@ modalImageCloseBtn.addEventListener("click", () => {
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 addCardForm.addEventListener("submit", handleCardAddSubmit);
-
-
-
-
