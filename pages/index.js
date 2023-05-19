@@ -1,3 +1,8 @@
+import Card from "../components/Card.js";
+
+import { FormValidator, settings} from "../components/FormValidator.js";
+
+import { handleEscClose, closeModal, openModal} from "../utils/utils.js";
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -65,6 +70,8 @@ const initialCards = [
   },
 ];
 
+
+
 /////////////// Elements //////////////
 
 //  profile elements //
@@ -93,7 +100,7 @@ const cardImageInput = document.querySelector("#card-image-input");
 const cardInputs = [...addCardModal.querySelectorAll('.modal__input')];
 const cardAddBtn = addCardModal.querySelector(".modal__button");
 const cardImagePop = document.querySelector("#card-image-modal");
-
+console.log()
 // card image elements //
 const modalImage = cardImagePop.querySelector(".modal__image");
 const modalCaption = cardImagePop.querySelector(".modal__image-name");
@@ -102,23 +109,8 @@ const modalImageCloseBtn = document.querySelector("#image-modal-close");
 // modalELement //
 const modalArray = document.querySelectorAll(".modal");
 
-const handleEscClose = (e) => {
-  const escKeycode = 27;
-  if (e.which === escKeycode) {
-    const activeModal = document.querySelector(".modal_opened");
-    closeModal(activeModal);
-  }
-};
+// Functions // 
 
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", handleEscClose);
-}
-
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", handleEscClose);
-}
 
 function addClickCloseListener(modal) {
   modal.addEventListener("mousedown", (e) => {
@@ -133,42 +125,14 @@ function addClickCloseListener(modal) {
 
 modalArray.forEach(addClickCloseListener);
 
-function createCard(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-  const cardLikeBtn = cardElement.querySelector(".card__like-button");
-  const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
-
-  cardLikeBtn.addEventListener("click", () => {
-    cardLikeBtn.classList.toggle("card__like-button_active");
-  });
-
-  cardDeleteBtn.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  cardImageEl.addEventListener("click", () => {
-    modalImage.src = data.link;
-    modalCaption.textContent = data.name;
-    modalImage.alt = `Photo of ${data.name}`;
-    openModal(cardImagePop);
-  });
-
-  cardImageEl.src = data.link;
-  cardImageEl.alt = `Photo of ${data.name}`;
-  cardTitleEl.textContent = data.name;
-  return cardElement;
-}
 
 function renderCard(data) {
-  const cardElement = createCard(data);
-  cardsWrap.prepend(cardElement);
+  const card = new Card(data,  "#card-template")
+  cardsWrap.prepend(card.getView());
 }
 
 initialCards.forEach(renderCard);
 
-/////////////////////Event Handlers/////////////////
 
 function handleProfileEditSubmit(event) {
   event.preventDefault();
@@ -181,18 +145,14 @@ function handleCardAddSubmit(event) {
   event.preventDefault();
   const name = cardTitleInput.value;
   const link = cardImageInput.value;
-  const cardElement = createCard({
-    name,
-    link,
-  });
-
+  const data = {name,link}
+  const cardElement = new Card(data, '#card-template');
+  cardElement.getView();
   event.target.reset();
 
   cardsWrap.prepend(cardElement);
   closeModal(addCardModal);
-  toggleButtonState(cardInputs, cardAddBtn, config)
-  
-  
+  addFormValidator.enableValidation();
 }
 
 /////////////////////Event Listeners///////////////
@@ -222,3 +182,10 @@ modalImageCloseBtn.addEventListener("click", () => {
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 addCardForm.addEventListener("submit", handleCardAddSubmit);
+
+
+const editFormValidator = new FormValidator(settings, profileEditForm);
+const addFormValidator = new FormValidator(settings, addCardForm);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
