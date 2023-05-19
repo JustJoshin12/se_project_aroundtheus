@@ -145,12 +145,11 @@ function handleCardAddSubmit(event) {
   event.preventDefault();
   const name = cardTitleInput.value;
   const link = cardImageInput.value;
-  const data = {name,link}
+  const data = {name,link};
   const cardElement = new Card(data, '#card-template');
-  cardElement.getView();
   event.target.reset();
 
-  cardsWrap.prepend(cardElement);
+  cardsWrap.prepend(cardElement.getView());
   closeModal(addCardModal);
   addFormValidator.enableValidation();
 }
