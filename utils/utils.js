@@ -17,7 +17,17 @@ const handleEscClose = (e) => {
   }
 
 
+  function addClickCloseListener(modal) {
+    modal.addEventListener("mousedown", (e) => {
+      if (
+        e.target.classList.contains("modal") ||
+        e.target.classList.contains("modal__close")
+      ) {
+        closeModal(modal);
+      }
+    });
+  }
   
   
 
-  export { handleEscClose, closeModal, openModal}
+  export { handleEscClose, closeModal, openModal, addClickCloseListener}

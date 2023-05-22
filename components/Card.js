@@ -34,6 +34,7 @@ class Card {
   _handlePreview() {
     const cardImagePop = document.querySelector("#card-image-modal");
     cardImagePop.querySelector(".modal__image").src = this._link;
+    cardImagePop.querySelector(".modal__image").alt = `Photo of ${this._name}`;
     cardImagePop.querySelector(".modal__image-name").textContent = this._name;
     openModal(cardImagePop);
   }

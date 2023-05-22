@@ -2,7 +2,7 @@ import Card from "../components/Card.js";
 
 import { FormValidator, settings} from "../components/FormValidator.js";
 
-import { handleEscClose, closeModal, openModal} from "../utils/utils.js";
+import { handleEscClose, closeModal, openModal, addClickCloseListener} from "../utils/utils.js";
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -112,16 +112,6 @@ const modalArray = document.querySelectorAll(".modal");
 // Functions // 
 
 
-function addClickCloseListener(modal) {
-  modal.addEventListener("mousedown", (e) => {
-    if (
-      e.target.classList.contains("modal") ||
-      e.target.classList.contains("modal__close")
-    ) {
-      closeModal(modal);
-    }
-  });
-}
 
 modalArray.forEach(addClickCloseListener);
 
@@ -146,12 +136,12 @@ function handleCardAddSubmit(event) {
   const name = cardTitleInput.value;
   const link = cardImageInput.value;
   const data = {name,link};
-  const cardElement = new Card(data, '#card-template');
+  const cardElement = renderCard(data);
   event.target.reset();
 
   cardsWrap.prepend(cardElement.getView());
   closeModal(addCardModal);
-  addFormValidator.enableValidation();
+  addFormValidator.toggleButtonState();
 }
 
 /////////////////////Event Listeners///////////////
