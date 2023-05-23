@@ -138,8 +138,6 @@ function handleCardAddSubmit(event) {
   const data = {name,link};
   const cardElement = renderCard(data);
   event.target.reset();
-
-  cardsWrap.prepend(cardElement.getView());
   closeModal(addCardModal);
   addFormValidator.toggleButtonState();
 }
