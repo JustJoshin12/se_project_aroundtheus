@@ -1,10 +1,11 @@
 import { openModal } from "../utils/utils.js";
 
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data, handleCardClick, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {
@@ -50,11 +51,15 @@ class Card {
 
   getView() {
     this._element = this._getTemplate();
-    this._element.querySelector(".card__image").src = this._link;
-    this._element.querySelector(".card__title").textContent = this._name;
-    this._element.querySelector(".card__image").alt = this._name;
+    const cardImage = this._element.querySelector('.card__image');
+    cardImage.src = this._link;
+    cardImage.alt = `Photo of ${this._name}`;
+    const cardTitle = this._element.querySelector('.card__title');
+    cardTitle.textContent = this._name;
+    // this._element.querySelector(".card__image").src = this._link;
+    // this._element.querySelector(".card__title").textContent = this._name;
+    // this._element.querySelector(".card__image").alt = this._name;
     this._setEventListeners();
-
     return this._element;
   }
 }
