@@ -68,5 +68,9 @@ export const initialCards = [
 
   
 export const selectors = {
-  profileModal : "#profile-edit-modal"
+  profileModal : "#profile-edit-modal",
+  profileTitle : ".profile__title",
+  profileDescription : ".profile__description",
+  profileNameInput : "#profile-title-input",
+  profileDescInput : "#profile-description-input"
 }

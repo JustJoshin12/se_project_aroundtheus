@@ -8,7 +8,6 @@ class PopupWithImage extends Popup {
     }
 
     open(imageData) {
-       console.log(imageData)
        this._name.textContent = imageData.title;
        this._image.src = imageData.image;
        this._name.alt = `Photo of ${imageData.title}`;

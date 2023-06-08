@@ -10,8 +10,9 @@ class PopupWithForm extends Popup {
     }
 
     close() {
-       super.close();
        this._popupForm.reset()
+       super.close();
+       
     }
 
     _getInputValues() {
@@ -19,13 +20,12 @@ class PopupWithForm extends Popup {
         this._formInputs.forEach( input => {
            inputValues[input.name] = input.value;
         })
-        console.log(inputValues);
         return inputValues;
     }
 
     setEventListeners() {
         super.setEventListeners();
-        this._submitButton.addEventListener('click', e => {
+        this._popupForm.addEventListener('submit', e => {
             e.preventDefault();
             this._handleFormSubmit(this._getInputValues());
         })

@@ -54,8 +54,8 @@ class Card {
     const cardImage = this._element.querySelector('.card__image');
     cardImage.src = this._link;
     cardImage.alt = `Photo of ${this._name}`;
-    const cardTitle = this._element.querySelector('.card__title');
-    cardTitle.textContent = this._name;
+      const cardTitle = this._element.querySelector('.card__title');
+        cardTitle.textContent = this._name;
     // this._element.querySelector(".card__image").src = this._link;
     // this._element.querySelector(".card__title").textContent = this._name;
     // this._element.querySelector(".card__image").alt = this._name;

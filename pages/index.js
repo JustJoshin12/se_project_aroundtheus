@@ -24,9 +24,10 @@ const closeProfileBtn = document.querySelector("#profile-modal-close");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
-const profileTitleInput = document.querySelector("#profile-title-input");
+const profileTitleInput = document.querySelector(selectors.profileNameInput);
+console.log(profileTitleInput.value)
 const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
+  selectors.profileDescInput
 );
 const profileEditForm = profileEditModal.querySelector("#profile-edit-form");
 const addCardBtn = document.querySelector(".profile__add-button");
@@ -54,42 +55,23 @@ const modalArray = document.querySelectorAll(".modal");
 
 modalArray.forEach(addClickCloseListener);
 
-function handleCardClick(imageData) {
-  cardImagePopup.open(imageData);
-  return
-}
-
-// function renderCard(data) {
-//   const card = new Card(data, "#card-template", handleCardClick);
-//   const cardElement = card.getView();
-//   cardSection.addItem(cardElement);
-//   return card;
+// function handleCardClick(imageData) {
+//   cardImagePopup.open(imageData);
+//   return
 // }
 
-// initialCards.forEach(renderCard);
 
-function handleProfileEditSubmit() {
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  profileModal.close()
-}
 
-function handleCardAddSubmit() {
-  const name = cardTitleInput.value;
-  const link = cardImageInput.value;
-  const data = { name, link };
-  const cardElement = renderCard(data);
-  closeModal(addCardModal);
-  addFormValidator.toggleButtonState();
-}
+// function handleProfileEditSubmit() {
+//   profileTitle.textContent = profileTitleInput.value;
+//   profileDescription.textContent = profileDescriptionInput.value;
+//   profileModal.close()
+// }
+
 
 /////////////////////Event Listeners///////////////
 
-editBtn.addEventListener("click", function revealModal() {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  openModal(profileEditModal);
-});
+
 
 closeProfileBtn.addEventListener("click", () => {
   closeModal(profileEditModal);
@@ -103,9 +85,7 @@ modalImageCloseBtn.addEventListener("click", () => {
   closeModal(cardImagePop);
 });
 
-// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
-// addCardForm.addEventListener("submit", handleCardAddSubmit);
 
 //     Form =====================================================================
 
@@ -153,13 +133,13 @@ addCardBtn.addEventListener("click", () => {
 const addCardFormPopup = new PopupWithForm("#add-card-modal", (data) => {
 
 const newCard = new Card( data, (imageData) => {
-  console.log(imageData)
   cardImagePop.open(imageData);
-}, "#card-template");
+} , "#card-template");
 
   cardSection.addItem(newCard.getView());
-
+  
   addCardFormPopup.close();
+  addFormValidator.toggleButtonState();
 
 });
 
@@ -167,11 +147,32 @@ addCardFormPopup.setEventListeners();
 
 addCardFormPopup.close();
 
-// Profile Form ================================================================
-const profileModalElement = "#profile-edit-modal"
+// Profile  ================================================================
 
-const userInfo = new UserInfo("profile__title","profile__description");
+const userInfo = new UserInfo(selectors.profileTitle, selectors.profileDescription);
 
-const profileModal = new PopupWithForm( selectors.profileModal , handleProfileEditSubmit);
+const profileModal = new PopupWithForm( selectors.profileModal , () => {
+     userInfo.setUserInfo(profileTitleInput.value,profileDescriptionInput.value);
+     profileModal.close();
+});
 
 profileModal.setEventListeners();
+
+// Edit Profile Form ===========================================================
+
+editBtn.addEventListener("click", () => {
+  const profileInfo = userInfo.getUserInfo();
+  profileTitleInput.value = profileInfo.name;
+  profileDescriptionInput.value = profileInfo.info;
+
+  editFormValidator.toggleButtonState();
+
+  profileModal.open();
+
+});
+
+
+
+profileModal.setEventListeners();
+
+profileModal.close();
