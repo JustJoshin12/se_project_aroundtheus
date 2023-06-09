@@ -1,5 +1,5 @@
 //      Modules     //
-
+import '../pages/index.css'
 import Card from "../components/Card.js";
 import { FormValidator, settings } from "../components/FormValidator.js";
 import {
