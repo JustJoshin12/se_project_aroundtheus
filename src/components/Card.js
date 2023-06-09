@@ -1,7 +1,8 @@
-import { openModal } from "../utils/utils.js";
+import { data } from "autoprefixer";
+
 
 class Card {
-  constructor(data, handleCardClick, cardSelector) {
+  constructor( data , handleCardClick, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
@@ -17,27 +18,18 @@ class Card {
 
     deleteButton.addEventListener("click", this._handleDelete.bind(this));
 
-    cardImage.addEventListener("click", this._handlePreview.bind(this));
+    cardImage.addEventListener("click", this._handleCardClick(data));
   }
 
   _handleLikeIcon() {
     this._element
       .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
-      console.log("should be dark heart")
   }
 
   _handleDelete() {
     this._element.remove();
     this._element = null;
-  }
-
-  _handlePreview() {
-    const cardImagePop = document.querySelector("#card-image-modal");
-    cardImagePop.querySelector(".modal__image").src = this._link;
-    cardImagePop.querySelector(".modal__image").alt = `Photo of ${this._name}`;
-    cardImagePop.querySelector(".modal__image-name").textContent = this._name;
-    openModal(cardImagePop);
   }
 
   _getTemplate() {

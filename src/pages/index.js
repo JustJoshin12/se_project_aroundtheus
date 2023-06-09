@@ -35,16 +35,10 @@ const addCardForm = addCardModal.querySelector("#add-card-form");
 const cardImagePop = document.querySelector("#card-image-modal");
 
 // card image elements //
-
-const modalImage = cardImagePop.querySelector(".modal__image");
-const modalCaption = cardImagePop.querySelector(".modal__image-name");
 const modalImageCloseBtn = document.querySelector("#image-modal-close");
 
-// modalELement //
-const modalArray = document.querySelectorAll(".modal");
 
 // Functions //
-
 
 
 // Event Listeners =============================================================
@@ -99,7 +93,8 @@ const cardSection = new Section(
       const cardElement = new Card(
         data,
         (imageData) => {
-          cardImagePopup.open(imageData);
+          console.log(data)
+          cardImagePopup.open({data});
         },
         selectors.cardTemplate
       );
@@ -119,8 +114,8 @@ cardSection.renderItems(initialCards);
 const addCardFormPopup = new PopupWithForm(selectors.addCardModal, (data) => {
   const newCard = new Card(
     data,
-    (imageData) => {
-      cardImagePop.open(imageData);
+    (formData) => {
+      cardImagePop.open(formData);
     },
     selectors.cardTemplate
   );

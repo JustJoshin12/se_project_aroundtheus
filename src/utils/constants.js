@@ -73,7 +73,7 @@ export const selectors = {
   profileDescription : ".profile__description",
   profileNameInput : "#profile-title-input",
   profileDescInput : "#profile-description-input",
-  cardImageModal: "#card-image-modal",
+  cardImageModal: ".modal__image-container",
   cardTemplate: "#card-template",
   cardList: ".cards__list",
   addCardModal: "#add-card-modal",
