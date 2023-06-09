@@ -1,3 +1,4 @@
+
 export default class Popup {
     constructor({popupSelector}) {
         this._popupElement = document.querySelector(popupSelector);
@@ -17,9 +18,9 @@ export default class Popup {
 
     _handleEscClose(e) {
         const escKeycode = 27;
-        if (e.key === escKeycode) {
-            this.close();
-          }
+        if (e.which === escKeycode) {
+          this.close();
+        }
     }
 
     setEventListeners() {

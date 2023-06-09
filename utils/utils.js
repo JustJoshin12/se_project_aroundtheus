@@ -30,4 +30,4 @@ const handleEscClose = (e) => {
   
   
 
-  export { handleEscClose, closeModal, openModal, addClickCloseListener}
+  export {closeModal, openModal, addClickCloseListener}
