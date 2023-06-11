@@ -2,58 +2,33 @@
 import '../pages/index.css'
 import Card from "../components/Card.js";
 import { FormValidator, settings } from "../components/FormValidator.js";
-import {
-  closeModal,
-  openModal,
-  addClickCloseListener,
-} from "../utils/utils.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards, selectors } from "../utils/constants.js";
 
-/////////////// Elements //////////////
 
-//  profile elements //
 
-const editBtn = document.querySelector(".profile__edit-button");
-const closeProfileBtn = document.querySelector("#profile-modal-close");
-const profileEditModal = document.querySelector("#profile-edit-modal");
+  // profile elements ==========================================================
+
+const editBtn = document.querySelector(selectors.profileEditBtn);
+const profileEditModal = document.querySelector(selectors.profileModal);
 const profileTitleInput = document.querySelector(selectors.profileNameInput);
 const profileDescriptionInput = document.querySelector(
   selectors.profileDescInput
 );
-const profileEditForm = profileEditModal.querySelector("#profile-edit-form");
-const addCardBtn = document.querySelector(".profile__add-button");
+const profileEditForm = profileEditModal.querySelector(selectors.profileForm);
+const addCardBtn = document.querySelector(selectors.profileAddBtn);
 
-// card list elements //
+ // card list elements =========================================================
 
-const addCardModal = document.querySelector("#add-card-modal");
-const closeCardBtn = document.querySelector("#card-modal-close");
-const addCardForm = addCardModal.querySelector("#add-card-form");
-const cardImagePop = document.querySelector("#card-image-modal");
-
-// card image elements //
-const modalImageCloseBtn = document.querySelector("#image-modal-close");
-
-
-// Functions //
+const addCardModal = document.querySelector(selectors.addCardModal);
+const addCardForm = addCardModal.querySelector(selectors.addCardForm);
 
 
 // Event Listeners =============================================================
 
-closeProfileBtn.addEventListener("click", () => {
-  closeModal(profileEditModal);
-});
-
-closeCardBtn.addEventListener("click", () => {
-  closeModal(addCardModal);
-});
-
-modalImageCloseBtn.addEventListener("click", () => {
-  closeModal(cardImagePop);
-});
 
 addCardBtn.addEventListener("click", () => {
   addCardFormPopup.open();
@@ -90,11 +65,11 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (data) => {
+
       const cardElement = new Card(
         data,
         (imageData) => {
-          console.log(data)
-          cardImagePopup.open({data});
+          cardImagePopup.open(imageData);
         },
         selectors.cardTemplate
       );
@@ -115,7 +90,7 @@ const addCardFormPopup = new PopupWithForm(selectors.addCardModal, (data) => {
   const newCard = new Card(
     data,
     (formData) => {
-      cardImagePop.open(formData);
+      cardImagePopup.open(formData);
     },
     selectors.cardTemplate
   );

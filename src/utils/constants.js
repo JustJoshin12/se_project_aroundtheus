@@ -63,20 +63,28 @@ export const initialCards = [
       name: "San Juan",
       link: "https://images.unsplash.com/photo-1625642471723-12744e6e4211?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
     },
+    {
+      name: "Chicago",
+      link: "https://i.gifer.com/BVOP.gif"
+    }
   ];
 
 
   
 export const selectors = {
   profileModal : "#profile-edit-modal",
+  profileForm: "#profile-edit-form",
+  profileEditBtn : ".profile__edit-button",
+  profileAddBtn : ".profile__add-button",
   profileTitle : ".profile__title",
   profileDescription : ".profile__description",
   profileNameInput : "#profile-title-input",
   profileDescInput : "#profile-description-input",
-  cardImageModal: ".modal__image-container",
+  cardImageModal: "#card-image-modal",
   cardTemplate: "#card-template",
   cardList: ".cards__list",
   addCardModal: "#add-card-modal",
+  addCardForm : "#add-card-form"
 }
 
 
