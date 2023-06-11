@@ -31,6 +31,7 @@ const addCardForm = addCardModal.querySelector(selectors.addCardForm);
 
 
 addCardBtn.addEventListener("click", () => {
+  addFormValidator.disableButton();
   addCardFormPopup.open();
 });
 
@@ -52,12 +53,28 @@ const addFormValidator = new FormValidator(settings, addCardForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
+// Functions ===================================================================
+
+  function renderCard(card) {
+    const cardElement = new Card(
+      card,
+      (imageData) => {
+        cardImagePopup.open(imageData);
+      },
+      selectors.cardTemplate
+    );
+    return cardElement.getView();
+  }
+ 
+
+
+
+
 //        Modal Image       ===============================================
 
 const cardImagePopup = new PopupWithImage(selectors.cardImageModal);
 
 cardImagePopup.setEventListeners();
-cardImagePopup.close();
 
 // Card Section ================================================================
 
@@ -66,15 +83,9 @@ const cardSection = new Section(
     items: initialCards,
     renderer: (data) => {
 
-      const cardElement = new Card(
-        data,
-        (imageData) => {
-          cardImagePopup.open(imageData);
-        },
-        selectors.cardTemplate
-      );
+      const card = renderCard(data)
 
-      cardSection.addItem(cardElement.getView());
+      cardSection.addItem(card);
     },
   },
 
@@ -87,15 +98,9 @@ cardSection.renderItems(initialCards);
 
 
 const addCardFormPopup = new PopupWithForm(selectors.addCardModal, (data) => {
-  const newCard = new Card(
-    data,
-    (formData) => {
-      cardImagePopup.open(formData);
-    },
-    selectors.cardTemplate
-  );
+  const newCard = renderCard(data)
 
-  cardSection.addItem(newCard.getView());
+  cardSection.addItem(newCard);
 
   addCardFormPopup.close();
   addFormValidator.toggleButtonState();
@@ -103,7 +108,7 @@ const addCardFormPopup = new PopupWithForm(selectors.addCardModal, (data) => {
 
 addCardFormPopup.setEventListeners();
 
-addCardFormPopup.close();
+
 
 // Profile  ================================================================
 
@@ -119,4 +124,4 @@ const profileModal = new PopupWithForm(selectors.profileModal, (data) => {
 
 profileModal.setEventListeners();
 
-profileModal.close();
+
