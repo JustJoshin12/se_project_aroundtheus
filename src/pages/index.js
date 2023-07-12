@@ -21,6 +21,8 @@ const profileDescriptionInput = document.querySelector(
 );
 const profileImageBtn = document.querySelector(selectors.profileImageBtn);
 const profileImage = document.querySelector(selectors.profileImage);
+const profileImageModal = document.querySelector(selectors.profileImageModal);
+const profileImageSubmitBtn = profileImageModal.querySelector(selectors.modalBtn)
 const addCardBtn = document.querySelector(selectors.profileAddBtn);
 
 // card list elements =========================================================
@@ -68,6 +70,7 @@ function setSubmitButtonText(buttonElement, text) {
   buttonElement.textContent = text;
 }
 
+
 function renderCard(card, userId) {
   const cardElement = new Card(
    card, //data 
@@ -76,7 +79,9 @@ function renderCard(card, userId) {
     }, //handleCardClick function
     selectors.cardTemplate, // cardSelector
     (card) => {
+      console.log(card)
       deleteCardPopup.setAction(() => {
+        console.log(card)
         setSubmitButtonText(deleteCardModalBtn, "Deleting...");
         api
           .deleteCard(card._id)
@@ -188,19 +193,18 @@ api
   .loadData()
   .then(([cards, userData]) => {
     userId = userData._id;
-    console.log(userId)
     userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
 
     sectionInstance = new Section(
       {
         items: cards,
         renderer: (data) => {
-          const card = renderCard(data);
+          const card = renderCard(data, userId);
           sectionInstance.addItem(card);
         },
       },
       selectors.cardList,
-      userId
+      // userId
     );
     sectionInstance.renderItems(cards);
   })
@@ -218,7 +222,7 @@ profileModal.setEventListeners();
 const profileImagePopup = new PopupWithForm(
   selectors.profileImageModal,
   (data) => {
-    setSubmitButtonText(profileImageBtn, "Saving...");
+    setSubmitButtonText(profileImageSubmitBtn, "Saving...");
 
     api
       .editProfileImage(data)
@@ -229,7 +233,7 @@ const profileImagePopup = new PopupWithForm(
         profileImagePopup.close();
       })
       .finally(() => {
-        setSubmitButtonText(profileImageBtn, "Save");
+        setSubmitButtonText(profileImageSubmitBtn, "Save");
       });
   }
 );
