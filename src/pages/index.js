@@ -75,13 +75,12 @@ function renderCard(card, userId) {
   const cardElement = new Card(
    card, //data 
     (imageData) => {
+      console.log(card)
       cardImagePopup.open(imageData);
     }, //handleCardClick function
     selectors.cardTemplate, // cardSelector
-    (card) => {
-      console.log(card)
+    () => {
       deleteCardPopup.setAction(() => {
-        console.log(card)
         setSubmitButtonText(deleteCardModalBtn, "Deleting...");
         api
           .deleteCard(card._id)
