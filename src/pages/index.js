@@ -73,12 +73,12 @@ function setSubmitButtonText(buttonElement, text) {
 
 function renderCard(card, userId) {
   const cardElement = new Card({
-    data: card, 
+    data: card,
     handleCardClick: (imageData) => {
       console.log(card);
       cardImagePopup.open(imageData);
-    }, 
-    cardSelector: selectors.cardTemplate, 
+    },
+    cardSelector: selectors.cardTemplate,
     handleDeleteClick: () => {
       deleteCardPopup.setAction(() => {
         setSubmitButtonText(deleteCardModalBtn, "Deleting...");
@@ -93,7 +93,7 @@ function renderCard(card, userId) {
           });
       });
       deleteCardPopup.open();
-    }, 
+    },
     handleLikeClick: () => {
       if (cardElement.isLiked()) {
         api
@@ -109,8 +109,8 @@ function renderCard(card, userId) {
           cardElement.setLikes(card.likes);
         });
       }
-    }, 
-    userId: userId
+    },
+    userId: userId,
   });
 
   return cardElement.getView();
@@ -165,7 +165,7 @@ let userId;
 
 const editProfilePopup = new PopupWithForm(selectors.profileModal, (data) => {
   setSubmitButtonText(profileModalSubmitBtn, "Saving...");
-  console.log(data)
+  console.log(data);
   api
     .editProfile(data)
     .then((data) => {
@@ -173,7 +173,7 @@ const editProfilePopup = new PopupWithForm(selectors.profileModal, (data) => {
       editProfilePopup.close();
     })
     .catch((err) => {
-      console.err(err.status)
+      console.error(err.status);
     })
     .finally(() => {
       setSubmitButtonText(profileModalSubmitBtn, "Save");
@@ -184,7 +184,6 @@ editProfilePopup.setEventListeners();
 
 editBtn.addEventListener("click", () => {
   const profileData = userInfo.getUserInfo();
-  console.log(profileData)
   profileTitleInput.value = profileData.name;
   profileDescriptionInput.value = profileData.info;
   editProfilePopup.open();
@@ -194,7 +193,8 @@ editBtn.addEventListener("click", () => {
 
 api.loadData().then(([cards, userData]) => {
   userId = userData._id;
-  userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
+  userInfo.setUserInfo(userData.name, userData.about);
+  userInfo.setUserImage(userData.avatar);
   sectionInstance = new Section(
     {
       items: cards,
@@ -209,12 +209,6 @@ api.loadData().then(([cards, userData]) => {
   sectionInstance.renderItems(cards);
 });
 
-const profileModal = new PopupWithForm(selectors.profileModal, (data) => {
-  userInfo.setUserInfo(data.title, data.description);
-  profileModal.close();
-});
-
-profileModal.setEventListeners();
 
 //Profile Image ===============================================================
 
@@ -222,12 +216,14 @@ const profileImagePopup = new PopupWithForm(
   selectors.profileImageModal,
   (data) => {
     setSubmitButtonText(profileImageSubmitBtn, "Saving...");
-    console.log(data)
+
     api
       .editProfileImage(data)
       .then((data) => {
-        console.log(data)
         userInfo.setUserImage(data.avatar);
+      })
+      .catch((err) => {
+        console.error(err.status)
       })
       .then(() => {
         profileImagePopup.close();
