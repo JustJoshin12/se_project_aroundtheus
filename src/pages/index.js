@@ -83,7 +83,7 @@ function renderCard(card, userId) {
         api
           .deleteCard(card._id)
           .then(() => {
-            cardElement._handleDelete();
+            cardElement.handleDelete();
             deleteCardPopup.close();
           })
           .catch((err) => {
@@ -106,8 +106,12 @@ function renderCard(card, userId) {
             console.error(err.status);
           });
       } else {
-        api.likeCountAdd(card._id).then((card) => {
+        api.likeCountAdd(card._id)
+        .then((card) => {
           cardElement.setLikes(card.likes);
+        })
+        .catch((err) => {
+          console.error(err.status);
         });
       }
     },
@@ -139,12 +143,11 @@ const addCardPopup = new PopupWithForm(selectors.addCardModal, (data) => {
       const newCard = renderCard(data, userId);
       sectionInstance.addItem(newCard);
     })
-    .catch((err) => {
-      console.error(err.status);
-    })
     .then(() => {
       addCardPopup.close();
-      formValidators["add-card-form"].disableButton()
+    })
+    .catch((err) => {
+      console.error(err.status);
     })
     .finally(() => {
       setSubmitButtonText(addCardSubmitBtn, "Create");
@@ -152,6 +155,7 @@ const addCardPopup = new PopupWithForm(selectors.addCardModal, (data) => {
 });
 
 addCardBtn.addEventListener("click", () => {
+  formValidators["add-card-form"].disableButton();
   addCardPopup.open();
 });
 
@@ -175,8 +179,7 @@ const editProfilePopup = new PopupWithForm(selectors.profileModal, (data) => {
     .editProfile(data)
     .then((data) => {
       userInfo.setUserInfo(data.name, data.about);
-      editProfilePopup.close();
-      formValidators["profile-edit-form"].disableButton();
+      editProfilePopup.close()
     
     })
     .catch((err) => {
@@ -193,12 +196,14 @@ editBtn.addEventListener("click", () => {
   const profileData = userInfo.getUserInfo();
   profileTitleInput.value = profileData.name;
   profileDescriptionInput.value = profileData.info;
+  formValidators["profile-edit-form"].disableButton();
   editProfilePopup.open();
 });
 
 // Card Section ================================================================
 
-api.loadData().then(([cards, userData]) => {
+api.loadData()
+.then(([cards, userData]) => {
   userId = userData._id;
   userInfo.setUserInfo(userData.name, userData.about);
   userInfo.setUserImage(userData.avatar);
@@ -213,7 +218,10 @@ api.loadData().then(([cards, userData]) => {
     selectors.cardList
   );
   sectionInstance.renderItems(cards);
-});
+})
+.catch((err) => {
+  console.error(err.status);
+})
 
 
 //Profile Image ===============================================================
@@ -228,12 +236,11 @@ const profileImagePopup = new PopupWithForm(
       .then((data) => {
         userInfo.setUserImage(data.avatar);
       })
-      .catch((err) => {
-        console.error(err.status)
-      })
       .then(() => {
         profileImagePopup.close();
-        formValidators["profile-image-form"].disableButton();
+      })
+      .catch((err) => {
+        console.error(err.status);
       })
       .finally(() => {
         setSubmitButtonText(profileImageSubmitBtn, "Save");
@@ -242,6 +249,7 @@ const profileImagePopup = new PopupWithForm(
 );
 
 profileImageBtn.addEventListener("click", () => {
+  formValidators["profile-image-form"].disableButton();
   profileImagePopup.open();
 });
 

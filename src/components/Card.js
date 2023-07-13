@@ -71,7 +71,7 @@ class Card {
       .classList.toggle("card__like-button_active");
   }
 
-  _handleDelete() {
+  handleDelete() {
     this._element.remove();
     this._element = null;
   }
