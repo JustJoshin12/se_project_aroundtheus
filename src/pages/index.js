@@ -14,7 +14,9 @@ import Api from "../components/Api.js";
 
 const editBtn = document.querySelector(selectors.profileEditBtn);
 const profileEditModal = document.querySelector(selectors.profileModal);
-const profileModalSubmitBtn = profileEditModal.querySelector(selectors.modalBtn);
+const profileModalSubmitBtn = profileEditModal.querySelector(
+  selectors.modalBtn
+);
 const profileTitleInput = document.querySelector(selectors.profileNameInput);
 const profileDescriptionInput = document.querySelector(
   selectors.profileDescInput
@@ -22,7 +24,9 @@ const profileDescriptionInput = document.querySelector(
 const profileImageBtn = document.querySelector(selectors.profileImageBtn);
 const profileImage = document.querySelector(selectors.profileImage);
 const profileImageModal = document.querySelector(selectors.profileImageModal);
-const profileImageSubmitBtn = profileImageModal.querySelector(selectors.modalBtn)
+const profileImageSubmitBtn = profileImageModal.querySelector(
+  selectors.modalBtn
+);
 const addCardBtn = document.querySelector(selectors.profileAddBtn);
 
 // card list elements =========================================================
@@ -34,8 +38,6 @@ const addCardForm = addCardModal.querySelector(selectors.addCardForm);
 const deleteCardModal = document.querySelector(selectors.deleteCardModal);
 const deleteCardModalBtn = deleteCardModal.querySelector(selectors.modalBtn);
 
-
-
 //    API    =======================================================================
 
 const api = new Api({
@@ -45,7 +47,6 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-
 
 //     Form Validation   =====================================================================
 
@@ -70,16 +71,15 @@ function setSubmitButtonText(buttonElement, text) {
   buttonElement.textContent = text;
 }
 
-
 function renderCard(card, userId) {
-  const cardElement = new Card(
-   card, //data 
-    (imageData) => {
-      console.log(card)
+  const cardElement = new Card({
+    data: card, 
+    handleCardClick: (imageData) => {
+      console.log(card);
       cardImagePopup.open(imageData);
-    }, //handleCardClick function
-    selectors.cardTemplate, // cardSelector
-    () => {
+    }, 
+    cardSelector: selectors.cardTemplate, 
+    handleDeleteClick: () => {
       deleteCardPopup.setAction(() => {
         setSubmitButtonText(deleteCardModalBtn, "Deleting...");
         api
@@ -93,8 +93,8 @@ function renderCard(card, userId) {
           });
       });
       deleteCardPopup.open();
-    }, //handleDeleteClick function
-    () => {
+    }, 
+    handleLikeClick: () => {
       if (cardElement.isLiked()) {
         api
           .likeCountRemove(card._id)
@@ -105,15 +105,13 @@ function renderCard(card, userId) {
             console.error(err.status);
           });
       } else {
-        api
-          .likeCountAdd(card._id)
-          .then((card) => {
-            cardElement.setLikes(card.likes);
-          })
+        api.likeCountAdd(card._id).then((card) => {
+          cardElement.setLikes(card.likes);
+        });
       }
-    },// handleLikeClick function 
-    userId
-  );
+    }, 
+    userId: userId
+  });
 
   return cardElement.getView();
 }
@@ -150,8 +148,9 @@ const addCardPopup = new PopupWithForm(selectors.addCardModal, (data) => {
 
 addCardBtn.addEventListener("click", () => {
   addCardPopup.open();
-  addCardPopup.setEventListeners();
 });
+
+addCardPopup.setEventListeners();
 
 // Profile  ================================================================
 
@@ -166,48 +165,49 @@ let userId;
 
 const editProfilePopup = new PopupWithForm(selectors.profileModal, (data) => {
   setSubmitButtonText(profileModalSubmitBtn, "Saving...");
-
+  console.log(data)
   api
     .editProfile(data)
     .then((data) => {
       userInfo.setUserInfo(data.name, data.about);
       editProfilePopup.close();
     })
+    .catch((err) => {
+      console.err(err.status)
+    })
     .finally(() => {
       setSubmitButtonText(profileModalSubmitBtn, "Save");
     });
 });
 
+editProfilePopup.setEventListeners();
+
 editBtn.addEventListener("click", () => {
   const profileData = userInfo.getUserInfo();
+  console.log(profileData)
   profileTitleInput.value = profileData.name;
   profileDescriptionInput.value = profileData.info;
   editProfilePopup.open();
-  editProfilePopup.setEventListeners();
 });
 
 // Card Section ================================================================
 
-api
-  .loadData()
-  .then(([cards, userData]) => {
-    userId = userData._id;
-    userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
-
-    sectionInstance = new Section(
-      {
-        items: cards,
-        renderer: (data) => {
-          const card = renderCard(data, userId);
-          sectionInstance.addItem(card);
-        },
+api.loadData().then(([cards, userData]) => {
+  userId = userData._id;
+  userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
+  sectionInstance = new Section(
+    {
+      items: cards,
+      renderer: (data) => {
+        const card = renderCard(data, userId);
+        sectionInstance.addItem(card);
       },
-      selectors.cardList,
-      // userId
-    );
-    sectionInstance.renderItems(cards);
-  })
- 
+    },
+    selectors.cardList
+    // userId
+  );
+  sectionInstance.renderItems(cards);
+});
 
 const profileModal = new PopupWithForm(selectors.profileModal, (data) => {
   userInfo.setUserInfo(data.title, data.description);
@@ -222,10 +222,11 @@ const profileImagePopup = new PopupWithForm(
   selectors.profileImageModal,
   (data) => {
     setSubmitButtonText(profileImageSubmitBtn, "Saving...");
-
+    console.log(data)
     api
       .editProfileImage(data)
       .then((data) => {
+        console.log(data)
         userInfo.setUserImage(data.avatar);
       })
       .then(() => {
@@ -239,6 +240,6 @@ const profileImagePopup = new PopupWithForm(
 
 profileImageBtn.addEventListener("click", () => {
   profileImagePopup.open();
-  profileImagePopup.setEventListeners();
 });
 
+profileImagePopup.setEventListeners();

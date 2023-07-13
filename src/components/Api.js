@@ -21,12 +21,12 @@ export default class Api {
   }
 
   editProfile(data) {
-    return fetch(`${this._baseUrl}/user/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._header,
       body: JSON.stringify({
         name: data.name,
-        about: data.about,
+        about: data.info,
       }),
     })
     .then(this._checkRequest);
