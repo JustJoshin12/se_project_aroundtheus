@@ -22,7 +22,6 @@ const profileDescriptionInput = document.querySelector(
   selectors.profileDescInput
 );
 const profileImageBtn = document.querySelector(selectors.profileImageBtn);
-const profileImage = document.querySelector(selectors.profileImage);
 const profileImageModal = document.querySelector(selectors.profileImageModal);
 const profileImageSubmitBtn = profileImageModal.querySelector(
   selectors.modalBtn
@@ -33,8 +32,6 @@ const addCardBtn = document.querySelector(selectors.profileAddBtn);
 
 const addCardModal = document.querySelector(selectors.addCardModal);
 const addCardSubmitBtn = addCardModal.querySelector(selectors.modalBtn);
-const cardModalSubmitBtn = document.querySelector(selectors.modalBtn);
-const addCardForm = addCardModal.querySelector(selectors.addCardForm);
 const deleteCardModal = document.querySelector(selectors.deleteCardModal);
 const deleteCardModalBtn = deleteCardModal.querySelector(selectors.modalBtn);
 
@@ -63,6 +60,7 @@ const enableValidation = (settings) => {
   });
 };
 
+
 enableValidation(settings);
 
 // Functions ===================================================================
@@ -87,6 +85,9 @@ function renderCard(card, userId) {
           .then(() => {
             cardElement._handleDelete();
             deleteCardPopup.close();
+          })
+          .catch((err) => {
+            console.error(err.status)
           })
           .finally(() => {
             setSubmitButtonText(deleteCardModalBtn, "Yes");
@@ -138,8 +139,12 @@ const addCardPopup = new PopupWithForm(selectors.addCardModal, (data) => {
       const newCard = renderCard(data, userId);
       sectionInstance.addItem(newCard);
     })
+    .catch((err) => {
+      console.error(err.status);
+    })
     .then(() => {
       addCardPopup.close();
+      formValidators["add-card-form"].disableButton()
     })
     .finally(() => {
       setSubmitButtonText(addCardSubmitBtn, "Create");
@@ -171,6 +176,8 @@ const editProfilePopup = new PopupWithForm(selectors.profileModal, (data) => {
     .then((data) => {
       userInfo.setUserInfo(data.name, data.about);
       editProfilePopup.close();
+      formValidators["profile-edit-form"].disableButton();
+    
     })
     .catch((err) => {
       console.error(err.status);
@@ -204,7 +211,6 @@ api.loadData().then(([cards, userData]) => {
       },
     },
     selectors.cardList
-    // userId
   );
   sectionInstance.renderItems(cards);
 });
@@ -227,6 +233,7 @@ const profileImagePopup = new PopupWithForm(
       })
       .then(() => {
         profileImagePopup.close();
+        formValidators["profile-image-form"].disableButton();
       })
       .finally(() => {
         setSubmitButtonText(profileImageSubmitBtn, "Save");

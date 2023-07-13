@@ -35,9 +35,6 @@ class Card {
     });
   }
 
-  getId() {
-    return this._cardId;
-  }
 
   isLiked() {
     return this._likes.some((like) => like._id === this._userId);

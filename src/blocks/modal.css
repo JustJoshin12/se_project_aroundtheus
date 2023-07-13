@@ -41,7 +41,6 @@
 .modal__heading {
   padding: 0;
   margin: 0;
-  margin-bottom: 54px;
   font-family: "Inter", sans-serif;
   font-size: 24px;
   font-weight: 900;
@@ -71,6 +70,7 @@
 .modal__form {
   display: flex;
   flex-direction: column;
+  margin-top: 52px;
 }
 
 
