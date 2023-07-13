@@ -4,6 +4,23 @@
   padding-top: 40px;
   padding-bottom: 51px;
 }
+.profile__container{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24px;
+  transition: opacity 4s ease-in-out;
+}
+
+.profile__container:hover > .profile__image-edit-button {
+     display: block;
+}
+
+.profile__container:hover > .profile__image {
+  opacity: 0.4;
+}
+
 
 .profile__image {
   height: 120px;
@@ -11,7 +28,18 @@
   border-radius: 360px;
   object-fit: cover;
   background-position: center;
-  margin-right: 24px;
+}
+
+
+.profile__image-edit-button {
+  background: transparent url(../images/edit-button.svg) center no-repeat;
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  border-width: 0px;
+  padding: 0;
+  cursor: pointer;
+  display: none;
 }
 
 .profile__info {
